@@ -1,16 +1,10 @@
 using TMPro;
 using UnityEngine;
 
-public class TextHealthBarRenderer : MonoBehaviour
+public class TextHealthBarRenderer : HealthBarRenderer
 {
-    [SerializeField] private Health _health;
     [SerializeField] private TextMeshProUGUI _text;
 
-    private void Update()
-    {
-        Render();
-    }
-
-    private void Render() =>
+    protected override void Render() =>
         _text.text = _health.Value + "/" + _health.MaxValue;
 }

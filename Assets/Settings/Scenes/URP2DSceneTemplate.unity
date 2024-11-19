@@ -1682,7 +1682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: {fileID: 1995170366}
   _slider: {fileID: 1547391569}
-  _delay: 0.1
+  _delay: 0.003
 --- !u!1 &1601873701
 GameObject:
   m_ObjectHideFlags: 0

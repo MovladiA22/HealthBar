@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] private int _maxValue;
     [SerializeField] private int _currentValue;
+
+    public event Action Changed;
 
     public int Value => _currentValue;
     public int MaxValue => _maxValue;
@@ -15,6 +18,8 @@ public class Health : MonoBehaviour
 
         _currentValue -= amount;
         _currentValue = Mathf.Clamp(_currentValue, 0, _maxValue);
+
+        Changed?.Invoke();
     }
 
     public void Replenish(int amount)
@@ -24,5 +29,7 @@ public class Health : MonoBehaviour
 
         _currentValue += amount;
         _currentValue = Mathf.Clamp(_currentValue, 0, _maxValue);
+
+        Changed?.Invoke();
     }
 }

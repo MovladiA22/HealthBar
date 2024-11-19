@@ -1,24 +1,24 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SmoothHealthBarRenderer : MonoBehaviour
+public class SmoothHealthBarRenderer : HealthBarRenderer
 {
-    [SerializeField] private Health _health;
     [SerializeField] private Slider _slider;
     [SerializeField] private float _delay;
 
-    private void Awake()
-    {
-        _slider.maxValue = _health.MaxValue;
-        _slider.wholeNumbers = false;
-        _slider.value = _health.Value;
-    }
+    protected override void Render() =>
+        StartCoroutine(SmoothRender());
 
-    private void Update()
+    private IEnumerator SmoothRender()
     {
-        Render();
-    }
+        var wait = new WaitForEndOfFrame();
+        float currentHealth = (float)_health.Value / _health.MaxValue;
 
-    private void Render() =>
-        _slider.value = Mathf.MoveTowards(_slider.value, _health.Value, _delay);
+        while (_slider.value != currentHealth)
+        {
+            _slider.value = Mathf.MoveTowards(_slider.value, currentHealth, _delay);
+            yield return wait;
+        }
+    }
 }
