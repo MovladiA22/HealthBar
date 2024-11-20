@@ -6,5 +6,5 @@ public class TextHealthBarRenderer : HealthBarRenderer
     [SerializeField] private TextMeshProUGUI _text;
 
     protected override void Render() =>
-        _text.text = _health.Value + "/" + _health.MaxValue;
+        _text.text = Health.Value + "/" + Health.MaxValue;
 }

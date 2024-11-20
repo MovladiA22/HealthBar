@@ -7,13 +7,20 @@ public class SmoothHealthBarRenderer : HealthBarRenderer
     [SerializeField] private Slider _slider;
     [SerializeField] private float _delay;
 
-    protected override void Render() =>
-        StartCoroutine(SmoothRender());
+    private Coroutine _coroutine;
 
-    private IEnumerator SmoothRender()
+    protected override void Render()
+    {
+        if (_coroutine != null)
+            StopCoroutine(_coroutine);
+
+        _coroutine = StartCoroutine(RenderingSmooth());
+    }
+
+    private IEnumerator RenderingSmooth()
     {
         var wait = new WaitForEndOfFrame();
-        float currentHealth = (float)_health.Value / _health.MaxValue;
+        float currentHealth = (float)Health.Value / Health.MaxValue;
 
         while (_slider.value != currentHealth)
         {

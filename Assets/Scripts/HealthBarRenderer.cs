@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HealthBarRenderer : MonoBehaviour
 {
-    [SerializeField] protected Health _health;
+    [SerializeField] protected Health Health;
 
     private void Awake()
     {
@@ -11,12 +11,12 @@ public class HealthBarRenderer : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.Changed += Render;
+        Health.Changed += Render;
     }
 
     private void OnDisable()
     {
-        _health.Changed -= Render;
+        Health.Changed -= Render;
     }
 
     protected virtual void Render() { }

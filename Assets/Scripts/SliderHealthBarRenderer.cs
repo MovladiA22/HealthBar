@@ -6,5 +6,5 @@ public class SliderHealthBarRenderer : HealthBarRenderer
     [SerializeField] private Slider _slider;
 
     protected override void Render() =>
-        _slider.value = (float)_health.Value / _health.MaxValue;
+        _slider.value = (float)Health.Value / Health.MaxValue;
 }
